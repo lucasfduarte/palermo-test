@@ -24,6 +24,7 @@ export const TopRow = styled(View)`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  margin-bottom: 15px;
 `
 
 export const Icon = styled(Image)`

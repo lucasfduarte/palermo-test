@@ -1,5 +1,5 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
-import styled from 'styled-components'
+import styled from 'styled-components/native'
 
 export const CartTitle = styled(Text)`
   font-style: normal;
