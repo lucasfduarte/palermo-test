@@ -58,7 +58,7 @@ const HomeScreen = ({ navigation }: iProps) => {
     } else {
       setDisplayProducts(products)
     }
-  }, [selectedCategory])
+  }, [selectedCategory, products])
 
   return (
     <Container>
@@ -99,7 +99,7 @@ const HomeScreen = ({ navigation }: iProps) => {
         }
       />
 
-      <GoToCart onPress={() => null} />
+      {/* <GoToCart onPress={goToCartScreen} /> */}
     </Container>
   )
 }

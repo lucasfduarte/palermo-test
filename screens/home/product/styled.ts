@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/native";
 import { Image, View, Text, TouchableOpacity, ScrollView } from "react-native";
 
 export const BottomRow = styled(View)`
