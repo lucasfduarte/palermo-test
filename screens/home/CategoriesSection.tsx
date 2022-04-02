@@ -1,14 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text } from 'react-native'
 import { Chip } from '../components/Chip/Chip'
+import { DEFAULT_CATEGORY } from './constants'
 import { CategoriesContainer, CategoriesSectionLabel } from './styled'
 
 interface iProps {
   categories: string[]
+  selectedCategory: string
+  setSelected: (category: string) => void
 }
 
-export const CategoriesSection = ({ categories }: iProps) => {
-  // test with a lot of categories
+export const CategoriesSection = ({ 
+  categories,
+  selectedCategory,
+  setSelected, 
+}: iProps) => {
+  const handlePress = (category: string) => {
+    setSelected(category)
+  } 
+
   return (
     <View>
       <CategoriesSectionLabel>
@@ -21,8 +31,18 @@ export const CategoriesSection = ({ categories }: iProps) => {
           alignItems: 'flex-start',
         }}
       >
+        <Chip 
+          selected={selectedCategory === DEFAULT_CATEGORY} 
+          label={DEFAULT_CATEGORY}
+          onPressFn={() => handlePress(DEFAULT_CATEGORY)} 
+        />
         {categories.map((category) => (
-          <Chip key={category} selected={false} label={category} />
+          <Chip 
+            key={category}
+            selected={selectedCategory === category}
+            label={category}
+            onPressFn={() => handlePress(category)}
+          />
         ))}
       </CategoriesContainer>
     </View>

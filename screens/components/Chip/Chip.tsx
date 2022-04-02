@@ -1,15 +1,16 @@
 import React from 'react'
-import { ActiveChip, ActiveChipText, StandardChip, StandardChipText } from '../styled'
+import { ActiveChip, ActiveChipText, StandardChip, StandardChipText } from './styled'
 
 interface ChipProps {
   selected: boolean
   label: string
+  onPressFn: () => void
 }
 
-export const Chip = ({ selected, label }: ChipProps) => {
+export const Chip = ({ selected, label, onPressFn }: ChipProps) => {
   if (selected) {
     return (
-      <ActiveChip>
+      <ActiveChip onPress={onPressFn}>
         <ActiveChipText>
           {label}
         </ActiveChipText>
@@ -17,7 +18,7 @@ export const Chip = ({ selected, label }: ChipProps) => {
     )
   } else {
     return (
-      <StandardChip>
+      <StandardChip onPress={onPressFn}>
         <StandardChipText>
           {label}
         </StandardChipText>
