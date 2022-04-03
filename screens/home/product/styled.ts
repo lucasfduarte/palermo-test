@@ -9,7 +9,8 @@ export const BottomRow = styled(View)`
 export const ProductItemContainer = styled(View)`
   width: 158px;
   height: 222px;
-  margin-right: 10px;
+  margin-right: 24px;
+  margin-bottom: 40px;
 `
 
 export const ProductImage = styled(Image)`

@@ -31,3 +31,26 @@ export const Icon = styled(Image)`
   width: 22px;
   height: 22px;
 `
+
+export const CartBadge = styled(View)`
+  width: 14px;
+  height: 14px;
+  border-radius: 22px;
+  border: 0.5px solid rgba(219, 219, 219, 0.98);
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+`
+
+export const CartBadgeLabel = styled(Text)`
+  font-style: normal;
+  font-weight: 700;
+  font-size: 8px;
+  line-height: 9px;
+  color: #9A8BFF;
+`

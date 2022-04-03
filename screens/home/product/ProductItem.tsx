@@ -1,4 +1,6 @@
 import React from "react";
+import { useGlobal } from "reactn";
+import { addItemToCart } from "../../../global/globalState";
 import { CheckoutButton } from "../../components/CheckoutButton/CheckoutButton";
 import { Product } from "./interfaces";
 import { BottomRow, ProductCategoryLabel, ProductDescriptionLabel, ProductImage, ProductItemContainer, ProductPriceLabel, ProductTitleLabel } from "./styled";
@@ -21,6 +23,10 @@ export const ProductItem = ({
     description
   } = product
 
+  const addProductItemToCart = () => {
+    addItemToCart(product)
+  }
+
   return (
     <ProductItemContainer>
       <ProductImage source={{ 
@@ -41,10 +47,10 @@ export const ProductItem = ({
       )}
       <BottomRow>
         <ProductPriceLabel>
-          {`$${price}`}
+          {`$${price && price.toFixed(2)}`}
         </ProductPriceLabel>
 
-        <CheckoutButton /> 
+        <CheckoutButton onPressFn={addProductItemToCart} /> 
       </BottomRow>
     </ProductItemContainer>
   )

@@ -7,12 +7,10 @@ import { SectionLabel } from "./styled";
 
 interface iProps {
   products: Product[]
-  filterCategory: string
 }
 
 export const ProductsList = ({
   products,
-  filterCategory, 
 }: iProps) => {
   return (
     <View>
@@ -42,9 +40,6 @@ export const ProductsList = ({
           flex: 1,
           justifyContent: 'space-around',
         }}
-        ListFooterComponent={
-          () => <Divider noBorder spacing={16} />
-        }
       />
     </View>
   )

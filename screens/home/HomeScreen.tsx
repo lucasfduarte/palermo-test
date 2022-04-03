@@ -1,21 +1,23 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { FlatList, TouchableHighlight, View } from "react-native";
 import { fetchAllCategories, fetchAllProducts, fetchNewestProducts, fetchProductsPerCategory } from "../../api/requests";
 import { Divider } from "../components/Divider/Divider";
-import { Container, Headline, Icon, TopRow } from "../styled";
-import { GoToCart } from "./cart/GoToCart";
+import { CartBadge, CartBadgeLabel, Container, Headline, Icon, TopRow } from "../styled";
+import { ActionButton } from "../components/ActionButton/ActionButton";
 import { CategoriesSection } from "./CategoriesSection";
 import { DEFAULT_CATEGORY } from "./constants";
 import { Product } from "./product/interfaces";
 import { NewProductsList } from "./product/NewProductsList";
 import { ProductsList } from "./product/ProductsList";
+import { useGlobal } from "reactn";
 
 interface iProps {
   navigation: NativeStackNavigationProp<any>
 }
 
 const HomeScreen = ({ navigation }: iProps) => {
+  const [cart] = useGlobal('cart')
   const [selectedCategory, setSelectedCategory] = useState<string>(DEFAULT_CATEGORY)
   const [newestProducts, setNewestProducts] = useState<Product[]>([])
   const [products, setProducts] = useState<Product[]>([])
@@ -67,9 +69,17 @@ const HomeScreen = ({ navigation }: iProps) => {
           Produtos
         </Headline>
         <TouchableHighlight onPress={() => goToCartScreen()}>
-          <Icon
-            source={require('../../assets/icons/bag_icon.png')}
-          />
+          <>
+            <Icon
+              source={require('../../assets/icons/bag_icon.png')}
+            />
+            {cart && cart.length ?
+              <CartBadge>
+                <CartBadgeLabel>{cart.length}</CartBadgeLabel>
+              </CartBadge>
+              : <Fragment />
+            }
+          </>
         </TouchableHighlight>
       </TopRow>
       <CategoriesSection 
@@ -99,7 +109,7 @@ const HomeScreen = ({ navigation }: iProps) => {
         }
       />
 
-      {/* <GoToCart onPress={goToCartScreen} /> */}
+      {cart && cart.length ? <ActionButton label="IR PARA CARRINHO" onPress={goToCartScreen} /> : <View />}
     </Container>
   )
 }

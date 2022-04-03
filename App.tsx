@@ -1,11 +1,19 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useEffect } from 'react';
+import { setGlobal } from 'reactn';
+import { initialGlobalState } from './global/globalState';
 import CartScreen from './screens/cart/CartScreen';
+import { ConfirmationScreen } from './screens/confirmation/ConfirmationScreen';
 import HomeScreen from './screens/home/HomeScreen';
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
 export default function App() {
+  useEffect(() => {
+    setGlobal(initialGlobalState)
+  }, [])
+
   return (
     <NavigationContainer>
       <Navigator initialRouteName='Home'>
@@ -28,11 +36,19 @@ export default function App() {
               fontSize: 12,
             },
             headerStyle: {
+              // @ts-ignore
               elevation: 0,
               shadowOpacity: 0,
               borderBottomWidth: 0,
               shadow: 'none',
             },
+          }}
+        />
+        <Screen 
+          name='Success'
+          component={ConfirmationScreen}
+          options={{
+            headerShown: false
           }}
         />
       </Navigator>

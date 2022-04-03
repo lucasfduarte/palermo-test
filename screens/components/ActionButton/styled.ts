@@ -1,7 +1,7 @@
 import { TouchableOpacity, View, Text } from 'react-native'
 import styled from 'styled-components/native'
 
-export const GoToCartContainer = styled(View)`
+export const ActionButtonContainer = styled(View)`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -11,7 +11,7 @@ export const GoToCartContainer = styled(View)`
   background: #FFFFFF;
 `
 
-export const GoToCartButtonWrapper = styled(TouchableOpacity)`
+export const ActionButtonWrapper = styled(TouchableOpacity)`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -24,7 +24,7 @@ export const GoToCartButtonWrapper = styled(TouchableOpacity)`
   border-radius: 37px;
 `
 
-export const GoToCartLabel = styled(Text)`
+export const ActionButtonLabel = styled(Text)`
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
