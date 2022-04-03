@@ -16,8 +16,6 @@ export const CartListItem = ({ product, indexAtCart }: iProps) => {
     price,
   } = product
 
-  console.log('index', indexAtCart)
-
   const removeFromCart = () => {
     removeItemFromCart(indexAtCart)
   }

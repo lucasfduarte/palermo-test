@@ -1,6 +1,6 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { Fragment, useEffect, useState } from "react";
-import { FlatList, TouchableHighlight, View } from "react-native";
+import { ActivityIndicator, FlatList, TouchableHighlight, View } from "react-native";
 import { fetchAllCategories, fetchAllProducts, fetchNewestProducts, fetchProductsPerCategory } from "../../api/requests";
 import { Divider } from "../components/Divider/Divider";
 import { CartBadge, CartBadgeLabel, Container, Headline, Icon, TopRow } from "../styled";
@@ -64,52 +64,61 @@ const HomeScreen = ({ navigation }: iProps) => {
 
   return (
     <Container>
-      <TopRow>
-        <Headline>
-          Produtos
-        </Headline>
-        <TouchableHighlight onPress={() => goToCartScreen()}>
+      {
+        (!products || !products.length) ? (
+          <ActivityIndicator size={'large'} color='#8775FE' />
+        ) : (
           <>
-            <Icon
-              source={require('../../assets/icons/bag_icon.png')}
+            <TopRow>
+              <Headline>
+                Produtos
+              </Headline>
+              <TouchableHighlight onPress={() => goToCartScreen()}>
+                <>
+                  <Icon
+                    source={require('../../assets/icons/bag_icon.png')}
+                  />
+                  {cart && cart.length ?
+                    <CartBadge>
+                      <CartBadgeLabel>{cart.length}</CartBadgeLabel>
+                    </CartBadge>
+                    : <Fragment />
+                  }
+                </>
+              </TouchableHighlight>
+            </TopRow>
+            <CategoriesSection 
+              categories={categories} 
+              selectedCategory={selectedCategory} 
+              setSelected={setSelectedCategory} 
             />
-            {cart && cart.length ?
-              <CartBadge>
-                <CartBadgeLabel>{cart.length}</CartBadgeLabel>
-              </CartBadge>
-              : <Fragment />
-            }
-          </>
-        </TouchableHighlight>
-      </TopRow>
-      <CategoriesSection 
-        categories={categories} 
-        selectedCategory={selectedCategory} 
-        setSelected={setSelectedCategory} 
-      />
-      <FlatList
-        data={[]}
-        renderItem={() => null}
-        ListHeaderComponent={
-          shouldRenderNewestList ? (
-            () => (
-              <>
-                <NewProductsList products={newestProducts} />
-                <Divider />
-              </>
-            )
-          ) : (
-            <View />
-          )
-        }
-        ListFooterComponent={
-          () => (
-            <ProductsList products={displayProducts} filterCategory={selectedCategory} />
-          )
-        }
-      />
+            <FlatList
+              data={[]}
+              renderItem={() => null}
+              ListHeaderComponent={
+                shouldRenderNewestList ? (
+                  () => (
+                    <>
+                      <NewProductsList products={newestProducts} />
+                      <Divider />
+                    </>
+                  )
+                ) : (
+                  <View />
+                )
+              }
+              ListFooterComponent={
+                () => (
+                  <ProductsList products={displayProducts} />
+                )
+              }
+            />
 
-      {cart && cart.length ? <ActionButton label="IR PARA CARRINHO" onPress={goToCartScreen} /> : <View />}
+            {cart && cart.length ? <ActionButton label="IR PARA CARRINHO" onPress={goToCartScreen} /> : <View />}
+          </>
+        )
+      }
+      
     </Container>
   )
 }
